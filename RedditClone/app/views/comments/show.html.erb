@@ -1,0 +1,11 @@
+<h1>Comments</h1>
+
+<%= @comment.content %>
+
+Reply to this comment: 
+<form action="<%= sub_post_comments_url(@comment) %>" method="post">
+  <%= auth_token %>
+  
+  <textarea name="comment[content]" rows="8" cols="80"></textarea>
+  <input type="submit" name="" value="Add Comment">
+</form>

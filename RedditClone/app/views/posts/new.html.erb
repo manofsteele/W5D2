@@ -2,6 +2,8 @@
 
 <form action="<%= sub_posts_url %>" method="post">
   <%= auth_token %>
+  
+  
   <label>
     Title: <input type="text" name="post[title]" value="<%= @post.title %>">
   </label>
@@ -9,6 +11,15 @@
     URL: <input type="text" name="post[url]" value="<%= @post.url %>">
   </label>
   <textarea name="post[content]" rows="8" cols="80"><%= @post.content %></textarea>
+  <ul>
+    <% Sub.all.each do |sub| %>
+    <li>
+      <label> <%= sub.title %>
+        <input type="checkbox" name="post[sub_ids][]" value="<%= sub.id %>">
+      </label>
+    </li>
+    <% end %>
+  </ul>
   
   <input type="submit" name="" value="Create Post">
 </form>

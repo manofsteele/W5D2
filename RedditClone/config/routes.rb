@@ -4,8 +4,11 @@ Rails.application.routes.draw do
   resource :session, only: [:new, :create, :destroy]
   
   resources :subs do
-    resources :posts, only: [:new, :create, :edit, :update, :show]
+    resources :posts, only: [:new, :create, :edit, :update, :show] do 
+      resources :comments, only: [:new, :create]
+    end
   end
 
+  resources :comments, only: [:show]
   resources :posts, only: :destroy
 end

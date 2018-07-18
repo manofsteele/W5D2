@@ -32,7 +32,7 @@ class ApplicationController < ActionController::Base
   
   def require_author
     @post = Post.find_by(id: params[:id])
-    redirect_to sub_post_url(@post.sub, @post) unless @post.author_id == current_user.id
+    redirect_to sub_post_url(@post) unless @post.author_id == current_user.id
   end
   
 end

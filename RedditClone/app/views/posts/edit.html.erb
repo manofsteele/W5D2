@@ -1,6 +1,6 @@
 <h1>Edit Post</h1>
 
-<form action="<%= sub_post_url(@post) %>" method="post">
+<form action="<%= sub_post_url(params[:sub_id], @post) %>" method="post">
   <%= auth_token %>
   <input type="hidden" name="_method" value="patch">
   <label>

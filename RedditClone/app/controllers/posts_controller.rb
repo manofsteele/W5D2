@@ -10,10 +10,12 @@ class PostsController < ApplicationController
   
   def create
     @post = Post.new(post_params)
-    @post.sub_id = params[:sub_id]
+    # params[:post][:sub_ids].each do |sub_id| 
+    #   PostSub.create(sub_id: sub_id, post_id: @post.id)
+    # end
     @post.author_id = current_user.id
     if @post.save 
-      redirect_to sub_post_url(@post.sub, @post)
+      redirect_to sub_post_url(params[:sub_id], @post)
     else 
       flash.now[:errors] = @post.errors.full_messages
       render :new 
@@ -28,7 +30,7 @@ class PostsController < ApplicationController
   def update
     @post = Post.find_by(id: params[:id])
     if @post.update_attributes(post_params)
-      redirect_to sub_post_url(@post)
+      redirect_to sub_post_url(params[:sub_id], @post)
     else 
       flash.now[:errors] = @post.errors.full_messages
       render :edit 
@@ -43,12 +45,12 @@ class PostsController < ApplicationController
   def destroy
     @post = Post.find_by(id: params[:id])
     @post.destroy 
-    redirect_to sub_url(@post.sub)
+    redirect_to subs_url
   end
   
   private
   
   def post_params
-    params.require(:post).permit(:title, :url, :content)
+    params.require(:post).permit(:title, :url, :content, sub_ids: [])
   end
 end 

@@ -1,0 +1,12 @@
+<h1>New Comment!</h1>
+
+<form action=" <%= sub_post_comments_url(params[:sub_id], params[:post_id]) %> " method="post">
+  <%= auth_token %>
+  
+  <label>Comment
+  <textarea name="comment[content]" rows="8" cols="80"><%= @comment.content %></textarea>
+  </label>
+  
+  <input type="submit" value="Post Comment">
+  
+</form>

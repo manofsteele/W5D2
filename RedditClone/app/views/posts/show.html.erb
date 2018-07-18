@@ -4,9 +4,9 @@ Author: <%= @post.author.username %>
 URL: <%= @post.url %>
 Content: <%= @post.content %>
 
-<a href="<%= sub_url(@post.sub) %>">Back to Sub <%= @post.sub.title %></a>
+<a href="<%= sub_url(params[:sub_id]) %>">Back to Sub</a>
 
-<a href="<%= edit_sub_post_url(@post.sub, @post)%> ">Edit Post</a>
+<a href="<%= edit_sub_post_url(params[:sub_id], @post)%> ">Edit Post</a>
 
 <form action="<%= post_url(@post)%>" method="post">
   <%= auth_token %>
@@ -14,3 +14,14 @@ Content: <%= @post.content %>
   <input type="submit" name="" value="Remove Post">
   
 </form>
+
+<a href="<%= new_sub_post_comment_url(params[:sub_id], @post) %>">Add Comment</a>
+
+
+<ul>
+  <% @post.comments.each do |comment| %>
+    <li>
+      <a href="<%= comment_url(comment) %>"><%= comment.content %></a>
+    </li>
+  <% end  %>
+</ul>

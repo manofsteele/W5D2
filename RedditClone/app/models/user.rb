@@ -13,6 +13,10 @@ class User < ApplicationRecord
   has_many :posts,
     foreign_key: :author_id,
     class_name: :Post
+    
+  has_many :comments,
+    foreign_key: :author_id,
+    class_name: :Comment
   
   def ensure_session_token
     self.session_token ||= SecureRandom.urlsafe_base64(16)
